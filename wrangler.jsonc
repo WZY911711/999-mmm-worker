@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "999-mmm-worker",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-12",
+  "d1_databases": [
+    {
+      "binding": "BACKGROUND_DB",
+      "database_name": "999-background",
+      "database_id": "45e6873d-d3a2-4d9a-a0a5-5218150a2525"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "GENERATION_QUEUE",
+        "queue": "999-generation"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "999-generation",
+        "max_batch_size": 1,
+        "max_retries": 3
+      }
+    ]
+  },
+  "vars": {
+    "VAPID_SUBJECT": "mailto:replace@example.com"
+  }
+}
